@@ -10,4 +10,7 @@ public interface UserService {
     Optional<User> findById(Long id);
     void save(User user);
     void remove(Long id);
+
+    User findByUserName(String username);
+    void changePassword(User user, String oldPassword, String newPassword);
 }
