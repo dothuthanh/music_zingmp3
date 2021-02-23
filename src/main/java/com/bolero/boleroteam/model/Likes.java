@@ -10,8 +10,8 @@ public class Likes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<User> users;
+    @ManyToOne
+    private User user;
 
     public Long getId() {
         return id;
@@ -21,11 +21,12 @@ public class Likes {
         this.id = id;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
+
 }

@@ -52,11 +52,26 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public List<Song> find3LatestSong() {
-        return songRepository.findTop3ByOrderByDateSubmittedDesc();
+        return songRepository.findTop6ByOrderByDateSubmittedDesc();
     }
 
     @Override
     public List<Song> findAllByOrderByViewsDesc() {
         return songRepository.findAllByOrderByViewsDesc();
     }
+
+    @Override
+    public List<Song> findAllSongByUserId(Long id) {
+        return songRepository.findAllByUserId(id);
+    }
+
+    @Override
+    public List<Song> findAllSongByLikes() {
+        return songRepository.findTop1ByOrderByLikesDesc();
+    }
+
+    //    @Override
+//    public List<Likes> findAllListLikeByUserId(Long id) {
+//        return songRepository.findAllByUserId(id);
+//    }
 }

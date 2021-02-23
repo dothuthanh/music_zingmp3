@@ -40,6 +40,26 @@ public class PlayListRestController {
         }
     }
 
+    @GetMapping(value = "album/song/{id}")
+    public ResponseEntity<List<Song>> getAllSongByAlbumId(@PathVariable Long id){
+        List<Song> album = playListService.findAllSongByAlbumId(id);
+        if (album == null){
+            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<Song>>(album,HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "album/user/{id}")
+    public ResponseEntity<List<PlayList>> getAlbumByUserId(@PathVariable Long id){
+        List<PlayList> album = playListService.findAllAlbumByUserId(id);
+        if (album == null){
+            return new ResponseEntity<List<PlayList>>(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<List<PlayList>>(album,HttpStatus.OK);
+        }
+    }
+
     @PostMapping(value = "album/create")
     public ResponseEntity<Void> createAlbum(@RequestBody PlayList playList){
         if (playList.getId() == null){
@@ -78,11 +98,11 @@ public class PlayListRestController {
     @DeleteMapping(value = "album/{id}")
     public ResponseEntity<PlayList> deleteAlbum(@PathVariable Long id){
         Optional<PlayList> playList = playListService.findById(id);
-        PlayList album = playList.get();
-        if (album == null){
+        if (playList == null){
             return new ResponseEntity<PlayList>(HttpStatus.NOT_FOUND);
         }else {
-            return new ResponseEntity<PlayList>(HttpStatus.NO_CONTENT);
+            playListService.remove(id);
+            return new ResponseEntity<PlayList>(HttpStatus.OK);
         }
     }
 }

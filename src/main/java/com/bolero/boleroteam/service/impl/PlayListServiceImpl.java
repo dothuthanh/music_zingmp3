@@ -1,5 +1,6 @@
 package com.bolero.boleroteam.service.impl;
 
+import com.bolero.boleroteam.model.Song;
 import com.bolero.boleroteam.repository.PlayListRepository;
 import com.bolero.boleroteam.model.PlayList;
 import com.bolero.boleroteam.service.PlayListService;
@@ -32,4 +33,15 @@ public class PlayListServiceImpl implements PlayListService {
     public void remove(Long id) {
         playListRepository.deleteById(id);
     }
+
+    @Override
+    public List<PlayList> findAllAlbumByUserId(Long id) {
+        return playListRepository.findAllByUserId(id);
+    }
+
+    @Override
+    public List<Song> findAllSongByAlbumId(Long id) {
+        return playListRepository.findAllById(id);
+    }
 }
+
