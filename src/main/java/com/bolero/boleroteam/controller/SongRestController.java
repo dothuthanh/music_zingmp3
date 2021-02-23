@@ -307,15 +307,7 @@ public class SongRestController {
             return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
         }
     }
-    @GetMapping(value = "most-views-song") // API lấy danh sách bài hát nhiều lượt nghe nhất
-    public ResponseEntity<List<Song>> findMostViewSong(){
-        List<Song> songs = songService.findAllByOrderByViewsDesc();
-        if (songs.isEmpty()){
-            return new ResponseEntity<List<Song>>(HttpStatus.NOT_FOUND);
-        }else {
-            return new ResponseEntity<List<Song>>(songs,HttpStatus.OK);
-        }
-    }
+
     @PutMapping(value = "like/{songId}")
     public ResponseEntity<Song> incrementLike(@RequestBody Likes likes,@PathVariable Long songId){
         Optional<Song> songOptional = songService.findById(songId);
